@@ -1,6 +1,5 @@
 package cc.zoyn.minebasic.log;
 
-import org.apache.logging.log4j.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
