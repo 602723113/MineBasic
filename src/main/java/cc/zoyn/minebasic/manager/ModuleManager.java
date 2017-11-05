@@ -1,5 +1,6 @@
 package cc.zoyn.minebasic.manager;
 
+import cc.zoyn.minebasic.log.Logger;
 import cc.zoyn.minebasic.plugin.Module;
 import com.google.common.collect.Lists;
 
@@ -48,11 +49,13 @@ public class ModuleManager implements IModuleManager {
     public void loadModule(Module module) {
         module.onLoad();
         modules.add(module);
+        Logger.info("Load Module " + "Successfully");
     }
 
     @Override
     public void disableModule(Module module) {
         module.onDisable();
+        modules.remove(module);
     }
 
     @Override
