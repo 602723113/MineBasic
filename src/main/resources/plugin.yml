@@ -1,0 +1,8 @@
+name: MineBasic
+main: cc.zoyn.minebasic.MineBasic
+version: 0.0.1
+author: Zoyn
+commands:
+  mb:
+    alias: [minebasic]
+    description: MineBasic's Main Command
