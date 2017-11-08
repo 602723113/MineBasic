@@ -1,11 +1,16 @@
 package cc.zoyn.minebasic;
 
+import cc.zoyn.minebasic.command.CommandManager;
 import cc.zoyn.minebasic.exception.UnLoadableModuleException;
 import cc.zoyn.minebasic.manager.ModuleManager;
 import cc.zoyn.minebasic.plugin.Module;
 import cc.zoyn.minebasic.plugin.ModuleClassLoader;
 import cc.zoyn.minebasic.plugin.ModuleInformation;
 import cc.zoyn.minebasic.util.FileNameFilter;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,6 +46,8 @@ public class MineBasic extends JavaPlugin {
         } catch (UnLoadableModuleException e) {
             e.printStackTrace();
         }
+
+        Bukkit.getPluginCommand("minebasic").setExecutor(new CommandManager());
     }
 
     /**
