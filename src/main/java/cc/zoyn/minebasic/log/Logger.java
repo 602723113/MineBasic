@@ -8,7 +8,8 @@ import java.util.Collection;
 
 /**
  * CustomLogger<br />
- * use console sender to custom a logger
+ * use {@link ConsoleCommandSender} to custom a logger
+ * 使用 {@link ConsoleCommandSender} 来自定义一个Log
  *
  * @author Zoyn
  * @since 2017-11-05
@@ -18,7 +19,8 @@ public class Logger {
     private static ConsoleCommandSender consoleCommandSender = Bukkit.getConsoleSender();
 
     /**
-     * you can't construct a {@link Logger}
+     * you can't construct a {@link Logger}<br />
+     * 你不能构造一个{@link Logger}
      */
     private Logger() {
     }

@@ -4,7 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * Represent a module's information
+ * Represent a module's information<br />
+ * 表示一个模块的信息
  *
  * @author Zoyn
  * @since 2017-11-05

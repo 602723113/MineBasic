@@ -8,15 +8,11 @@ import cc.zoyn.minebasic.plugin.ModuleInformation;
 import cc.zoyn.minebasic.util.FileNameFilter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_11_R1.CraftServer;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -71,6 +67,12 @@ public class MineBasic extends JavaPlugin {
         return moduleFile;
     }
 
+    /**
+     * load in the plugins/MineBasic/Modules Modules
+     * 读取 plugins/MineBasic/Modules 里的所有模块
+     *
+     * @throws UnLoadableModuleException
+     */
     private void loadModules() throws UnLoadableModuleException {
         ModuleManager moduleManager = getMouduleManager();
         File[] moduleJars = moduleFile.listFiles(new FileNameFilter(".jar"));
@@ -81,6 +83,7 @@ public class MineBasic extends JavaPlugin {
         InputStreamReader inputStreamReader = null;
         FileConfiguration fileConfiguration;
         ModuleInformation moduleInformation = null;
+        ModuleClassLoader moduleClassLoader = ModuleClassLoader.getInstance();
 
         String className;
         Class<? extends Module> moduleClass;
@@ -127,24 +130,15 @@ public class MineBasic extends JavaPlugin {
                 }
             }
 
+            if (moduleInformation == null)
+                throw new UnLoadableModuleException("can't load module.yml!");
+            className = moduleInformation.getMain();
+
             try {
-                if (moduleInformation == null)
-                    throw new UnLoadableModuleException("can't load module.yml!");
-                className = moduleInformation.getMain();
-
                 // load class...
-//                ModuleClassLoader moduleClassLoader = ModuleClassLoader.getInstance();
-//                moduleClassLoader.loadJar(moduleJar.toURI().toURL());
+                moduleClassLoader.loadJar(moduleJar.toURI().toURL());
 
-
-                URL url1 = new URL("file:" + moduleJar.getAbsolutePath());
-                URLClassLoader myClassLoader1 = new URLClassLoader(new URL[] { url1 }, Thread.currentThread().getContextClassLoader());
-                Class<?> myClass1 = myClassLoader1.loadClass("cc.zoyn.spawn.Spawn");
-                Module Module = (Module) myClass1.newInstance();
-                module.onLoad();
-
-
-                System.out.println("加载成功");
+                // check 'module' main class
                 Class<?> jarClass;
                 try {
                     jarClass = Class.forName(className);
@@ -152,14 +146,13 @@ public class MineBasic extends JavaPlugin {
                     throw new UnLoadableModuleException("Cannot find main class `" + className + "'", ex);
                 }
 
-
                 try {
                     moduleClass = jarClass.asSubclass(Module.class);
                 } catch (ClassCastException ex) {
                     throw new UnLoadableModuleException("main class `" + className + "' does not extend Module", ex);
                 }
 
-                module = ((Module) moduleClass.newInstance());
+                module = moduleClass.newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -167,6 +160,7 @@ public class MineBasic extends JavaPlugin {
             if (module == null)
                 throw new UnLoadableModuleException("can't load this module");
 
+            // give the obj to manager
             moduleManager.loadModule(module);
         }
     }

@@ -6,6 +6,7 @@ import java.io.FileFilter;
 /**
  * FileNameFilter<br />
  * it can filter files name
+ * 可以过滤文件后缀名
  *
  * @author Zoyn
  * @since 2017-11-05

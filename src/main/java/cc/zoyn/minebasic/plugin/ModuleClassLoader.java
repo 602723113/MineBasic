@@ -1,11 +1,14 @@
 package cc.zoyn.minebasic.plugin;
 
+import cc.zoyn.minebasic.MineBasic;
+
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 
 /**
- * To load a module's jar
+ * Use to load a module's jar<br />
+ * 用于读取一个模块的jar包
  *
  * @author Zoyn
  * @since 2017-11-05
@@ -13,7 +16,7 @@ import java.net.URLClassLoader;
 public class ModuleClassLoader extends URLClassLoader {
 
     private static ModuleClassLoader instance;
-    private static URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+    private static URLClassLoader classLoader = (URLClassLoader) MineBasic.class.getClassLoader();
     private static final Method ADD_URL = initAddMethod();
 
     static {
@@ -33,7 +36,7 @@ public class ModuleClassLoader extends URLClassLoader {
 
     private static Method initAddMethod() {
         try {
-            Method addUrl = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
+            Method addUrl = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
             addUrl.setAccessible(true);
             return addUrl;
         } catch (NoSuchMethodException e) {
@@ -43,7 +46,7 @@ public class ModuleClassLoader extends URLClassLoader {
 
     public void loadJar(URL url) {
         try {
-            ADD_URL.invoke(classLoader, new Object[]{url});
+            ADD_URL.invoke(classLoader, url);
         } catch (Exception e) {
             e.printStackTrace();
         }

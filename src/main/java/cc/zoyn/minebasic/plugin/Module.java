@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Represent a module
+ * Represent a module<br />
+ * 表示一个模块
  *
  * @author Zoyn
  * @since 2017-11-05

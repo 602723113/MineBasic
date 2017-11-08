@@ -5,7 +5,8 @@ import cc.zoyn.minebasic.plugin.Module;
 import java.util.List;
 
 /**
- * Standard {@link ModuleManager}
+ * Standard {@link ModuleManager}<br />
+ * 规范 {@link ModuleManager}
  *
  * @author Zoyn
  * @since 2017-11-05

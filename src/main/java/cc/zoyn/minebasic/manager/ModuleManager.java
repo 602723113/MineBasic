@@ -15,22 +15,26 @@ import java.util.List;
 public class ModuleManager implements IModuleManager {
 
     /**
-     * only one instance is allowed to exist
+     * only one instance is allowed to exist<br />
+     * 只允许一个实例存在
      */
     private static volatile ModuleManager instance;
     /**
-     * with modules
+     * with modules<br />
+     * 存放 Modules
      */
     private List<Module> modules = Lists.newArrayList();
 
     /**
-     * you can't construct a {@link ModuleManager},use {@link ModuleManager#getInstance()} to get
+     * you can't construct a {@link ModuleManager},use {@link ModuleManager#getInstance()} to get <br />
+     * 你不能实例化一个 {@link ModuleManager}, 请使用 ModuleManager.getInstance() 获得
      */
     private ModuleManager() {
     }
 
     /**
-     * get ModuleManager's instance
+     * get ModuleManager's instance<br />
+     * 获取 ModuleManager 的实例
      *
      * @return {@link ModuleManager}
      */
@@ -49,13 +53,14 @@ public class ModuleManager implements IModuleManager {
     public void loadModule(Module module) {
         module.onLoad();
         modules.add(module);
-        Logger.info("Load Module " + "Successfully");
+        Logger.info("[" + module.getModuleInformation().getName() + "] Load module successfully");
     }
 
     @Override
     public void disableModule(Module module) {
         module.onDisable();
         modules.remove(module);
+        Logger.info("[" + module.getModuleInformation().getName() + "] Disable module successfully");
     }
 
     @Override
