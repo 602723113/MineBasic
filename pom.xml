@@ -10,6 +10,7 @@
     <packaging>jar</packaging>
 
     <name>MineBasic</name>
+    <url>http://zoyn.cc/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,6 +39,12 @@
     </repositories>
 
     <dependencies>
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.40</version>
+        </dependency>
         <!-- apache commons -->
         <dependency>
             <groupId>commons-lang</groupId>
