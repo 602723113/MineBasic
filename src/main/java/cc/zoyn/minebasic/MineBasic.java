@@ -160,6 +160,8 @@ public class MineBasic extends JavaPlugin {
             if (module == null)
                 throw new UnLoadableModuleException("can't load this module");
 
+            module.setModuleInformation(moduleInformation);
+
             // give the obj to manager
             moduleManager.loadModule(module);
         }
