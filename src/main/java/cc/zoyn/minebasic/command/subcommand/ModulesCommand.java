@@ -13,9 +13,7 @@ public class ModulesCommand implements SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         ModuleManager.getInstance().getModules().forEach(
-                module -> {
-                    sender.sendMessage(module.getModuleInformation().getName() + " - " + module.getModuleInformation().getVersion());
-                }
+                module -> sender.sendMessage(module.getModuleInformation().getName() + " - " + module.getModuleInformation().getVersion())
         );
 
     }
