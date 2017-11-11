@@ -1,7 +1,6 @@
 package cc.zoyn.minebasic.command.subcommand;
 
 import cc.zoyn.minebasic.manager.ModuleManager;
-import cc.zoyn.minebasic.plugin.ModuleInformation;
 import cc.zoyn.minebasic.util.SubCommand;
 import org.bukkit.command.CommandSender;
 
