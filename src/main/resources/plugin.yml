@@ -3,6 +3,6 @@ main: cc.zoyn.minebasic.MineBasic
 version: 0.0.1
 author: Zoyn
 commands:
-  mb:
-    alias: [minebasic]
+  minebasic:
+    alias: [mb]
     description: MineBasic's Main Command

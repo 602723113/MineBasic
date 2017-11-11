@@ -66,7 +66,7 @@ public class MineBasic extends JavaPlugin {
      *
      * @return {@link ModuleManager}
      */
-    public static ModuleManager getMouduleManager() {
+    public static ModuleManager getModuleManager() {
         return ModuleManager.getInstance();
     }
 
@@ -81,7 +81,7 @@ public class MineBasic extends JavaPlugin {
      * @throws UnLoadableModuleException
      */
     private void loadModules() throws UnLoadableModuleException {
-        ModuleManager moduleManager = getMouduleManager();
+        ModuleManager moduleManager = getModuleManager();
         File[] moduleJars = moduleFile.listFiles(new FileNameFilter(".jar"));
         if (moduleJars == null)
             return;
